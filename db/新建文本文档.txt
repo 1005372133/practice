@@ -1,0 +1,65 @@
+指导员——1发布实习任务			发布任务
+	       2提出意见、打分
+	       3提交总体项目评价报告
+
+
+
+指导班主任——4给学生留意见和打分		留意见打分
+		5提交实习情况总体报告
+	
+
+
+
+学生——6查看实习任务			提交项目
+	7提交实习总结报告
+	      8日报
+	9查看教师留言
+
+
+指导员     1发布实习任务    
+学生   6查看实习任务   
+学生   8写日报   
+指导班主任 4给学生留意见和打分
+
+
+学生   9查看教师留言
+学生   7提交实习总结报告
+指导员 2提出意见、打分
+
+指导班主任   5提交实习情况总体报告
+指导员          3提交总体项目评价报告
+
+实习任务：
+id
+name
+createuser
+begintime
+endtime
+createtime
+getuser
+flag
+
+日报：
+id
+content
+time
+user
+意见
+分数
+
+
+
+意见：
+type-日报|项目总体
+time
+createuser
+foruser
+content
+
+
+总结报告：
+state
+committime
+content
+user
+commituser
