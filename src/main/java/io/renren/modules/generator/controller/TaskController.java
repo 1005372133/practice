@@ -3,17 +3,18 @@ package io.renren.modules.generator.controller;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.dao.SysUserTokenDao;
+import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.renren.modules.generator.entity.TaskEntity;
 import io.renren.modules.generator.service.TaskService;
@@ -32,12 +33,17 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @RequestMapping("generator/task")
+@Api("任务处理")
 public class TaskController {
     @Autowired
     private TaskService taskService;
 
     @Autowired
     private SysUserTokenDao sysUserTokenDao;
+
+    @Autowired
+    private SysUserDao sysUserDao;
+
 
 
     /**
@@ -102,5 +108,20 @@ public class TaskController {
 
         return R.ok();
     }
+
+
+
+//    获取所有学生
+    @PostMapping("/queryAllStuName")
+    @ApiOperation("获取所有学生")
+    // @RequiresPermissions("generator:task:delete")
+    public R queryAllStuName(){
+       List<SysUserEntity> s = sysUserDao.queryAllStuName();
+        if (s.size() > 0) {
+            return R.ok().put("all", sysUserDao.queryAllStuName());
+        } else return R.error();
+    }
+
+
 
 }

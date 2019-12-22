@@ -21,4 +21,18 @@
 		select * from sys_user where username = #{username}
 	</select>
 
+
+	<select id="queryAllStuName" resultType="io.renren.modules.sys.entity.SysUserEntity">
+		SELECT
+		su.user_id as id,su.username as name
+FROM
+	sys_user su
+	JOIN sys_user_role sur
+	JOIN sys_role sr
+WHERE
+	sur.user_id = su.user_id and
+	sr.role_id = sur.role_id
+	and sr.role_id='2' and su.user_id !='1'
+	</select>
+
 </mapper>

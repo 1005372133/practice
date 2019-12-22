@@ -55,5 +55,9 @@ public class TaskEntity implements Serializable {
 	 * 
 	 */
 	private String flag;
+	/**
+	 *
+	 */
+	private String contest;
 
 }

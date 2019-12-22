@@ -13,6 +13,7 @@
         <result property="createtime" column="createtime"/>
         <result property="getuser" column="getuser"/>
         <result property="flag" column="flag"/>
+        <result property="contest" column="contest"/>
     </resultMap>
 
 

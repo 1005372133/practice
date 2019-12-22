@@ -35,7 +35,7 @@ public class SuggestController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("generator:suggest:list")
+    //@RequiresPermissions("generator:suggest:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = suggestService.queryPage(params);
 
@@ -47,7 +47,7 @@ public class SuggestController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("generator:suggest:info")
+    //@RequiresPermissions("generator:suggest:info")
     public R info(@PathVariable("id") Integer id){
 		SuggestEntity suggest = suggestService.getById(id);
 
@@ -58,7 +58,7 @@ public class SuggestController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("generator:suggest:save")
+    //@RequiresPermissions("generator:suggest:save")
     public R save(@RequestBody SuggestEntity suggest){
 		suggestService.save(suggest);
 
@@ -69,10 +69,9 @@ public class SuggestController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("generator:suggest:update")
+    //@RequiresPermissions("generator:suggest:update")
     public R update(@RequestBody SuggestEntity suggest){
 		suggestService.updateById(suggest);
-
         return R.ok();
     }
 
@@ -80,7 +79,7 @@ public class SuggestController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("generator:suggest:delete")
+    //@RequiresPermissions("generator:suggest:delete")
     public R delete(@RequestBody Integer[] ids){
 		suggestService.removeByIds(Arrays.asList(ids));
 
