@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.renren.modules.generator.dao.SummarizeDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="io.renren.modules.generator.entity.SummarizeEntity" id="summarizeMap">
+        <result property="id" column="id"/>
+        <result property="committime" column="committime"/>
+        <result property="content" column="content"/>
+        <result property="user" column="user"/>
+        <result property="commituser" column="commituser"/>
+    </resultMap>
+
+
+</mapper>

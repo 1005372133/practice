@@ -63,3 +63,6 @@ committime
 content
 user
 commituser
+
+
+summarize
