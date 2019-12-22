@@ -1,9 +1,15 @@
 package io.renren.modules.generator.controller;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
+import io.renren.modules.sys.dao.SysUserTokenDao;
+import io.renren.modules.sys.entity.SysUserEntity;
+import io.renren.modules.sys.entity.SysUserTokenEntity;
+import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +22,7 @@ import io.renren.modules.generator.service.DadilyreportService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -31,11 +38,14 @@ public class DadilyreportController {
     @Autowired
     private DadilyreportService dadilyreportService;
 
+    @Autowired
+    private SysUserTokenDao sysUserTokenDao;
+
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("generator:dadilyreport:list")
+    //@RequiresPermissions("generator:dadilyreport:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = dadilyreportService.queryPage(params);
 
@@ -47,10 +57,9 @@ public class DadilyreportController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("generator:dadilyreport:info")
+    //@RequiresPermissions("generator:dadilyreport:info")
     public R info(@PathVariable("id") Integer id){
 		DadilyreportEntity dadilyreport = dadilyreportService.getById(id);
-
         return R.ok().put("dadilyreport", dadilyreport);
     }
 
@@ -58,10 +67,13 @@ public class DadilyreportController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("generator:dadilyreport:save")
-    public R save(@RequestBody DadilyreportEntity dadilyreport){
+    //@RequiresPermissions("generator:dadilyreport:save")
+    public R save(@RequestBody DadilyreportEntity dadilyreport,HttpServletRequest httpRequest){
+        dadilyreport.setTime(new Date());
+        String token = httpRequest.getHeader("token");
+        SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
+        dadilyreport.setUser(String.valueOf(sysUserTokenEntity.getUserId()));
 		dadilyreportService.save(dadilyreport);
-
         return R.ok();
     }
 
@@ -69,7 +81,7 @@ public class DadilyreportController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("generator:dadilyreport:update")
+    //@RequiresPermissions("generator:dadilyreport:update")
     public R update(@RequestBody DadilyreportEntity dadilyreport){
 		dadilyreportService.updateById(dadilyreport);
 
@@ -80,7 +92,7 @@ public class DadilyreportController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("generator:dadilyreport:delete")
+    //@RequiresPermissions("generator:dadilyreport:delete")
     public R delete(@RequestBody Integer[] ids){
 		dadilyreportService.removeByIds(Arrays.asList(ids));
 

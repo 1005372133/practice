@@ -1,8 +1,12 @@
 package io.renren.modules.generator.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Map;
 
+import io.renren.modules.sys.dao.SysUserTokenDao;
+import io.renren.modules.sys.entity.SysUserTokenEntity;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +20,7 @@ import io.renren.modules.generator.service.TaskService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 
+import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -31,11 +36,15 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private SysUserTokenDao sysUserTokenDao;
+
+
     /**
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("generator:task:list")
+   // @RequiresPermissions("generator:task:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = taskService.queryPage(params);
 
@@ -58,8 +67,15 @@ public class TaskController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("generator:task:save")
-    public R save(@RequestBody TaskEntity task){
+   // @RequiresPermissions("generator:task:save")
+    public R save(@RequestBody TaskEntity task, HttpServletRequest httpRequest){
+        task.setCreatetime(new Date());
+        String token = httpRequest.getHeader("token");
+        SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
+        task.setCreateuser(String.valueOf(sysUserTokenEntity.getUserId()));
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        task.setBegintime(simpleDateFormat.format(task.getBegintime()));
+//        task.setEndtime(simpleDateFormat.format(task.getEndtime()));
 		taskService.save(task);
 
         return R.ok();
@@ -69,7 +85,7 @@ public class TaskController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("generator:task:update")
+   // @RequiresPermissions("generator:task:update")
     public R update(@RequestBody TaskEntity task){
 		taskService.updateById(task);
 
@@ -80,7 +96,7 @@ public class TaskController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("generator:task:delete")
+   // @RequiresPermissions("generator:task:delete")
     public R delete(@RequestBody Integer[] ids){
 		taskService.removeByIds(Arrays.asList(ids));
 
