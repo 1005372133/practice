@@ -11,6 +11,8 @@
         <result property="user" column="user"/>
         <result property="score" column="score"/>
         <result property="opinion" column=" opinion"/>
+        <result property="zhidaoopinion" column="zhidaoopinion"/>
+        <result property="zhidaoscore" column=" zhidaoscore"/>
     </resultMap>
 
 

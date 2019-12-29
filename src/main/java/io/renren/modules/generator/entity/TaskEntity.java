@@ -38,10 +38,12 @@ public class TaskEntity implements Serializable {
 	/**
 	 * 
 	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date begintime;
 	/**
 	 * 
 	 */
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd")
 	private Date endtime;
 	/**
 	 * 

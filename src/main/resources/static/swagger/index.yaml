@@ -1,8 +1,8 @@
 swagger: '2.0'
 info:
-  description: 实习管理系统
+  description: 中软实习管理系统
   version: 1.0.0
-  title: 实习管理系统
+  title: 中软实习管理系统
 
 basePath: /renren-fast
 

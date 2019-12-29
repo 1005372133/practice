@@ -1,15 +1,13 @@
 package io.renren.modules.generator.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Map;
 
 import io.renren.modules.sys.dao.SysUserTokenDao;
-import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
-import org.apache.shiro.authc.AuthenticationToken;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,6 +19,7 @@ import io.renren.modules.generator.entity.DadilyreportEntity;
 import io.renren.modules.generator.service.DadilyreportService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,9 +45,11 @@ public class DadilyreportController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("generator:dadilyreport:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params,HttpServletRequest httpServletRequest){
+        String token = httpServletRequest.getHeader("token");
+        SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
+        params.put("user",String.valueOf(sysUserTokenEntity.getUserId()));
         PageUtils page = dadilyreportService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -99,4 +100,22 @@ public class DadilyreportController {
         return R.ok();
     }
 
+    @RequestMapping("/upload")
+    public R upload(@RequestParam("files") MultipartFile files){
+        String fileName = files.getOriginalFilename();
+        String fileSuffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
+        String localFileName = System.currentTimeMillis() + fileSuffix;
+        String filePath = "D:\\\\上传" + File.separator + localFileName;
+        File localFile = new File(filePath);
+        File imagePath = new File("D:\\\\上传");
+        if (!imagePath.exists()) {
+            imagePath.mkdirs();
+        }
+        try {
+            files.transferTo(localFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return R.ok();
+    }
 }

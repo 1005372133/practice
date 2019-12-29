@@ -45,4 +45,13 @@ public class DadilyreportEntity implements Serializable {
 	 */
 	private String  opinion;
 
+	/**
+	 *
+	 */
+	private String zhidaoscore;
+	/**
+	 *
+	 */
+	private String  zhidaoopinion;
+
 }
