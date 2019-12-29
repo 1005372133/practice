@@ -42,7 +42,6 @@ public class SysUserController extends AbstractController {
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
 
-
 	/**
 	 * 所有用户列表
 	 */
@@ -151,5 +150,14 @@ public class SysUserController extends AbstractController {
 		sysUserService.deleteBatch(userIds);
 		
 		return R.ok();
+	}
+
+	/**
+	 * 查询所有学生
+	 */
+	@PostMapping("/getAllStu")
+	//@RequiresPermissions("sys:user:delete")
+	public R getAllStu(){
+		return R.ok().put("allStu",sysUserService.getAllStu());
 	}
 }

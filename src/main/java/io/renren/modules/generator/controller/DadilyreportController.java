@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
+import io.renren.modules.generator.service.TaskService;
 import io.renren.modules.sys.dao.SysUserTokenDao;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static io.renren.common.utils.ShiroUtils.getUserId;
+
 
 /**
  * 
@@ -39,6 +43,9 @@ public class DadilyreportController {
 
     @Autowired
     private SysUserTokenDao sysUserTokenDao;
+
+    @Autowired
+    private TaskService taskService;
 
     /**
      * 列表
@@ -117,5 +124,14 @@ public class DadilyreportController {
             e.printStackTrace();
         }
         return R.ok();
+    }
+
+
+    //获取登陆人实习任务
+    @RequestMapping("/getTask")
+    public  R getTask() {
+        Map<String, Object> params = new HashMap<>();
+        params.put("getuser",getUserId());
+        return R.ok().put("page",taskService.queryPage(params));
     }
 }

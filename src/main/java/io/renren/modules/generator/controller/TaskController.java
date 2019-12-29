@@ -79,11 +79,8 @@ public class TaskController {
         String token = httpRequest.getHeader("token");
         SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
         task.setCreateuser(String.valueOf(sysUserTokenEntity.getUserId()));
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        task.setBegintime(simpleDateFormat.format(task.getBegintime()));
-//        task.setEndtime(simpleDateFormat.format(task.getEndtime()));
+        task.setFlag("0");
 		taskService.save(task);
-
         return R.ok();
     }
 

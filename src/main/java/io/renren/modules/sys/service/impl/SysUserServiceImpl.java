@@ -142,4 +142,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 			throw new RRException("新增用户所选角色，不是本人创建");
 		}
 	}
+
+//	查询所有学生
+	public List<SysUserEntity> getAllStu(){
+		return baseMapper.selectList(null);
+	}
 }
