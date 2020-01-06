@@ -27,10 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 /**
@@ -44,6 +41,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
+	@Autowired
+	private SysUserDao sysUserDao;
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
@@ -144,7 +143,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	}
 
 //	查询所有学生
-	public List<SysUserEntity> getAllStu(){
-		return baseMapper.selectList(null);
+	public List<Map<String,Object>> getAllStu(){
+		List<SysUserEntity>  list =baseMapper.selectList(null);
+		List<Map<String,Object>> result = new ArrayList<>();
+
+		for (int i = 0; i < list.size(); i++) {
+			Map<String,Object> s =	sysUserDao.queryAllStu(list.get(i).getUserId());
+			if (s!=null){
+				result.add(s);
+			}
+		}
+		return result;
 	}
 }

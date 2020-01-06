@@ -10,6 +10,7 @@ import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.dao.SysUserTokenDao;
 import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
+import io.renren.modules.sys.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -43,6 +44,8 @@ public class TaskController {
 
     @Autowired
     private SysUserDao sysUserDao;
+    @Autowired
+    private SysUserService sysUserService;
 
 
 
@@ -113,10 +116,8 @@ public class TaskController {
     @ApiOperation("获取所有学生")
     // @RequiresPermissions("generator:task:delete")
     public R queryAllStuName(){
-       List<SysUserEntity> s = sysUserDao.queryAllStuName();
-        if (s.size() > 0) {
-            return R.ok().put("all", sysUserDao.queryAllStuName());
-        } else return R.error();
+       List<Map<String,Object>> s = sysUserService.getAllStu();
+       return R.ok().put("page", s);
     }
 
 

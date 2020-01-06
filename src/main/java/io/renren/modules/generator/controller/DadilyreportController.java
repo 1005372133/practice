@@ -2,10 +2,7 @@ package io.renren.modules.generator.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import io.renren.modules.generator.service.TaskService;
 import io.renren.modules.sys.dao.SysUserTokenDao;
@@ -52,11 +49,16 @@ public class DadilyreportController {
      */
     @RequestMapping("/list")
     //@RequiresPermissions("generator:dadilyreport:list")
-    public R list(@RequestParam Map<String, Object> params,HttpServletRequest httpServletRequest){
-        String token = httpServletRequest.getHeader("token");
-        SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
-        params.put("user",String.valueOf(sysUserTokenEntity.getUserId()));
+    public R list(@RequestParam Map<String, Object> params){
+        params.put("user", getUserId());
         PageUtils page = dadilyreportService.queryPage(params);
+     /*   int s = page.getList().size();
+        for (int i = 0;i< page.getList().size();i++)
+        {
+            if (!page.getList().get(i).equals(getUserId())) {
+                page.getList().remove(i);
+            }
+        }*/
         return R.ok().put("page", page);
     }
 

@@ -23,16 +23,30 @@
 
 
 	<select id="queryAllStuName" resultType="io.renren.modules.sys.entity.SysUserEntity">
-		SELECT
-		su.user_id as id,su.username as name
+	SELECT
+	su.*
 FROM
 	sys_user su
 	JOIN sys_user_role sur
 	JOIN sys_role sr
-WHERE
-	sur.user_id = su.user_id and
-	sr.role_id = sur.role_id
-	and sr.role_id='2' and su.user_id !='1'
+	where  su.user_id=sur.user_id
+	and sr.role_id =sur.role_id
+	and sr.role_id='1'
+	</select>
+
+
+
+	<select id="queryAllStu" resultType="map">
+		SELECT
+	su.*,dr.zhidaoscore,dr.zhidaoopinion
+FROM
+	sys_user su
+	JOIN sys_user_role sur
+	JOIN sys_role sr
+	JOIN dadilyreport dr
+	where  su.user_id=sur.user_id
+	and sr.role_id =sur.role_id
+	and sr.role_id='1' and su.user_id = #{userId} and dr.`user`=su.user_id
 	</select>
 
 </mapper>

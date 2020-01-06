@@ -11,8 +11,10 @@ package io.renren.modules.sys.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.renren.modules.sys.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统用户
@@ -39,5 +41,8 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	SysUserEntity queryByUserName(String username);
 
 	List<SysUserEntity> queryAllStuName();
+
+
+	Map<String,Object> queryAllStu(@Param("userId") Long userId );
 
 }

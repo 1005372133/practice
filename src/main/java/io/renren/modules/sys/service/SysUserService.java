@@ -65,7 +65,7 @@ public interface SysUserService extends IService<SysUserEntity> {
 	boolean updatePassword(Long userId, String password, String newPassword);
 
 
-	List<SysUserEntity> getAllStu();
+	List<Map<String,Object>> getAllStu();
 
 
 }
