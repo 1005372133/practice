@@ -155,4 +155,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		}
 		return result;
 	}
+
+	public List<SysUserEntity> queryAllStuName(){
+		List<SysUserEntity> list =sysUserDao.queryAllStuName();
+		return list;
+	}
 }

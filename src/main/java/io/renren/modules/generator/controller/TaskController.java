@@ -116,7 +116,7 @@ public class TaskController {
     @ApiOperation("获取所有学生")
     // @RequiresPermissions("generator:task:delete")
     public R queryAllStuName(){
-       List<Map<String,Object>> s = sysUserService.getAllStu();
+       List<SysUserEntity> s = sysUserService.queryAllStuName();
        return R.ok().put("page", s);
     }
 
