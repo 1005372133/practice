@@ -110,7 +110,7 @@ public class DadilyreportController {
     }
 
     @RequestMapping("/upload")
-    public R upload(@RequestParam("files") MultipartFile files){
+    public R upload(@RequestParam("file") MultipartFile files){
         String fileName = files.getOriginalFilename();
         String fileSuffix = fileName.substring(fileName.lastIndexOf("."), fileName.length());
         String localFileName = System.currentTimeMillis() + fileSuffix;
