@@ -68,4 +68,6 @@ public interface SysUserService extends IService<SysUserEntity> {
 	List<Map<String,Object>> getAllStu();
 
 	List<SysUserEntity> queryAllStuName();
+
+	List<Map<String,Object>>queryAllStuNameScore();
 }

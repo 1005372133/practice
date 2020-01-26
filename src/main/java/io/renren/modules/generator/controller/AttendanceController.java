@@ -54,7 +54,6 @@ public class AttendanceController {
    // @RequiresPermissions("generator:attendance:info")
     public R info(@PathVariable("id") Integer id){
 		AttendanceEntity attendance = attendanceService.getById(id);
-
         return R.ok().put("attendance", attendance);
     }
 

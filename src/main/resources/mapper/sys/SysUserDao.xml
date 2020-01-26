@@ -36,6 +36,25 @@ FROM
 
 
 
+
+
+	<select id="queryAllStuNameScore" resultType="map">
+	SELECT
+	su.*,s.*
+FROM
+	sys_user su
+	JOIN sys_user_role sur
+	JOIN sys_role sr
+	join score s
+	where  su.user_id=sur.user_id
+	and sr.role_id =sur.role_id
+	and s.userid = su.user_id
+	and sr.role_id='1'
+	</select>
+
+
+
+
 	<select id="queryAllStu" resultType="map">
 		SELECT
 	su.*,dr.zhidaoscore,dr.zhidaoopinion
