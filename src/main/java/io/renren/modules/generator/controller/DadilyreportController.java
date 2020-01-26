@@ -6,13 +6,12 @@ import java.util.*;
 
 import io.renren.modules.generator.service.TaskService;
 import io.renren.modules.sys.dao.SysUserTokenDao;
+import io.renren.modules.sys.entity.SysUserEntity;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
+import io.renren.modules.sys.service.SysUserService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import io.renren.modules.generator.entity.DadilyreportEntity;
 import io.renren.modules.generator.service.DadilyreportService;
@@ -44,6 +43,9 @@ public class DadilyreportController {
     @Autowired
     private TaskService taskService;
 
+    @Autowired
+    private SysUserService sysUserService;
+
     /**
      * 列表
      */
@@ -61,6 +63,17 @@ public class DadilyreportController {
         }*/
         return R.ok().put("page", page);
     }
+
+
+    //    获取发布人
+    @PostMapping("/queryUser")
+    @ApiOperation("获取发布人")
+    // @RequiresPermissions("generator:task:delete")
+    public R queryUser(){
+        SysUserEntity s = sysUserService.queryUser();
+        return R.ok().put("page", s);
+    }
+
 
 
     /**

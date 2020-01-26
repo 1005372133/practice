@@ -68,4 +68,10 @@ public interface SysUserService extends IService<SysUserEntity> {
 	List<Map<String,Object>> getAllStu();
 
 	List<SysUserEntity> queryAllStuName();
+
+	/**
+	 * 查询发布人
+	 * @return
+	 */
+	SysUserEntity queryUser();
 }

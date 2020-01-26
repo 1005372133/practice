@@ -160,4 +160,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		List<SysUserEntity> list =sysUserDao.queryAllStuName();
 		return list;
 	}
+
+	@Override
+	public SysUserEntity queryUser() {
+		return sysUserDao.queryUser();
+	}
 }

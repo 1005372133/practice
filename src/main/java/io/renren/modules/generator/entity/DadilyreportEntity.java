@@ -54,4 +54,6 @@ public class DadilyreportEntity implements Serializable {
 	 */
 	private String  zhidaoopinion;
 
+
+
 }

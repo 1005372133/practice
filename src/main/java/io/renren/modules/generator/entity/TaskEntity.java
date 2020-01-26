@@ -1,5 +1,6 @@
 package io.renren.modules.generator.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -9,7 +10,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 
@@ -62,5 +62,13 @@ public class TaskEntity implements Serializable {
 	 *
 	 */
 	private String contest;
+
+
+	/**
+	 * 用户ID列表
+	 */
+	@TableField(exist=false)
+	private List<Integer> userList;
+
 
 }
