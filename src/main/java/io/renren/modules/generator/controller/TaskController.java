@@ -65,7 +65,7 @@ public class TaskController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("generator:task:info")
+    //@RequiresPermissions("generator:task:info")
     public R info(@PathVariable("id") Integer id){
 		TaskEntity task = taskService.getById(id);
 
@@ -119,6 +119,16 @@ public class TaskController {
     public R queryAllStuName(){
        List<SysUserEntity> s = sysUserService.queryAllStuName();
        return R.ok().put("page", s);
+    }
+
+
+    //    获取所有成绩
+    @PostMapping("/queryAllStuNameScore")
+    @ApiOperation("获取所有成绩")
+    // @RequiresPermissions("generator:task:delete")
+    public R queryAllStuNameScore(){
+        List<Map<String,Object>> s = sysUserService.queryAllStuNameScore();
+        return R.ok().put("page", s);
     }
 
 

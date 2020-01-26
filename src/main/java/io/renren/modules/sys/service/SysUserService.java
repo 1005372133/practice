@@ -69,6 +69,8 @@ public interface SysUserService extends IService<SysUserEntity> {
 
 	List<SysUserEntity> queryAllStuName();
 
+	List<Map<String,Object>>queryAllStuNameScore();
+
 	/**
 	 * 查询发布人
 	 * @return

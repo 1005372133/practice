@@ -165,4 +165,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	public SysUserEntity queryUser() {
 		return sysUserDao.queryUser();
 	}
+
+
+	public List<Map<String,Object>>queryAllStuNameScore(){
+		List<Map<String, Object>> list = new ArrayList<>();
+		   list = sysUserDao.queryAllStuNameScore();
+		return list;
+	}
+
+
 }
