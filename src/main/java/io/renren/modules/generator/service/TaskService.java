@@ -16,5 +16,13 @@ import java.util.Map;
 public interface TaskService extends IService<TaskEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    /**
+     * 保存实习任务
+     * @param task
+     * @return
+     */
+    void saveTask(TaskEntity task);
+
 }
 

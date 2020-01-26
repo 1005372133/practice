@@ -77,4 +77,8 @@ FROM
 	and sr.role_id='1' and su.user_id = #{userId} and dr.`user`=su.user_id
 	</select>
 
+	<select id="queryUser" resultType="io.renren.modules.sys.entity.SysUserEntity">
+		select s.username from  sys_user s left join dadilyreport d on s.user_id=d.user
+		where s.user_id=#{userId}
+	</select>
 </mapper>

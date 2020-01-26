@@ -84,7 +84,7 @@ public class TaskController {
         SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
         task.setCreateuser(String.valueOf(sysUserTokenEntity.getUserId()));
         task.setFlag("0");
-		taskService.save(task);
+		taskService.saveTask(task);
         return R.ok();
     }
 
