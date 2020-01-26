@@ -168,5 +168,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		return list;
 	}
 
+	public String getName(String userId){
+		return sysUserDao.getName(userId);
+	}
+
 
 }

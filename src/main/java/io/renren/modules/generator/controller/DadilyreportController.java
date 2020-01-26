@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.*;
 
 import io.renren.modules.generator.service.TaskService;
+import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.dao.SysUserTokenDao;
 import io.renren.modules.sys.entity.SysUserTokenEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class DadilyreportController {
     @Autowired
     private TaskService taskService;
 
+
     /**
      * 列表
      */
@@ -52,13 +54,6 @@ public class DadilyreportController {
     public R list(@RequestParam Map<String, Object> params){
         params.put("user", getUserId());
         PageUtils page = dadilyreportService.queryPage(params);
-     /*   int s = page.getList().size();
-        for (int i = 0;i< page.getList().size();i++)
-        {
-            if (!page.getList().get(i).equals(getUserId())) {
-                page.getList().remove(i);
-            }
-        }*/
         return R.ok().put("page", page);
     }
 

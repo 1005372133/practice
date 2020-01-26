@@ -53,6 +53,15 @@ FROM
 	</select>
 
 
+	<select id="getName" resultType="string">
+	SELECT
+	su.username
+FROM
+	sys_user su
+	where  su.user_id=#{userId}
+	</select>
+
+
 
 
 	<select id="queryAllStu" resultType="map">
