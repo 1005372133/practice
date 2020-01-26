@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -52,7 +53,7 @@ public class TaskEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private Integer getuser;
+	private List<Integer> getuser;
 	/**
 	 * 
 	 */

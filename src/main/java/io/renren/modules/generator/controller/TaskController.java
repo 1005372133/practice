@@ -78,6 +78,7 @@ public class TaskController {
     @RequestMapping("/save")
    // @RequiresPermissions("generator:task:save")
     public R save(@RequestBody TaskEntity task, HttpServletRequest httpRequest){
+//        task.setGetuser(task.getGetuser().toArray().toString());
         task.setCreatetime(new Date());
         String token = httpRequest.getHeader("token");
         SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
