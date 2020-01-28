@@ -1,10 +1,7 @@
 package io.renren.modules.generator.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import io.renren.modules.sys.dao.SysUserDao;
 import io.renren.modules.sys.dao.SysUserTokenDao;
@@ -13,6 +10,7 @@ import io.renren.modules.sys.entity.SysUserTokenEntity;
 import io.renren.modules.sys.service.SysUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 
 
 /**
- * 
- *
  * @author chenshun
  * @email sunlightcs@gmail.com
  * @date 2019-12-22 10:23:39
@@ -48,13 +44,12 @@ public class TaskController {
     private SysUserService sysUserService;
 
 
-
     /**
      * 列表
      */
     @RequestMapping("/list")
-   // @RequiresPermissions("generator:task:list")
-    public R list(@RequestParam Map<String, Object> params){
+    // @RequiresPermissions("generator:task:list")
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = taskService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -66,9 +61,8 @@ public class TaskController {
      */
     @RequestMapping("/info/{id}")
     //@RequiresPermissions("generator:task:info")
-    public R info(@PathVariable("id") Integer id){
-		TaskEntity task = taskService.getById(id);
-
+    public R info(@PathVariable("id") Integer id) {
+        TaskEntity task = taskService.getById(id);
         return R.ok().put("task", task);
     }
 
@@ -76,15 +70,16 @@ public class TaskController {
      * 保存
      */
     @RequestMapping("/save")
-   // @RequiresPermissions("generator:task:save")
-    public R save(@RequestBody TaskEntity task, HttpServletRequest httpRequest){
+    // @RequiresPermissions("generator:task:save")
+    public R save(@RequestBody TaskEntity task, HttpServletRequest httpRequest) {
 //        task.setGetuser(task.getGetuser().toArray().toString());
         task.setCreatetime(new Date());
+        task.setGetuser(task.getGetuser().substring(1, task.getGetuser().length() - 1));
         String token = httpRequest.getHeader("token");
         SysUserTokenEntity sysUserTokenEntity = sysUserTokenDao.queryByToken(token);
         task.setCreateuser(String.valueOf(sysUserTokenEntity.getUserId()));
         task.setFlag("0");
-		taskService.saveTask(task);
+        taskService.saveTask(task);
         return R.ok();
     }
 
@@ -92,10 +87,9 @@ public class TaskController {
      * 修改
      */
     @RequestMapping("/update")
-   // @RequiresPermissions("generator:task:update")
-    public R update(@RequestBody TaskEntity task){
-		taskService.updateById(task);
-
+    // @RequiresPermissions("generator:task:update")
+    public R update(@RequestBody TaskEntity task) {
+        taskService.updateById(task);
         return R.ok();
     }
 
@@ -103,22 +97,21 @@ public class TaskController {
      * 删除
      */
     @RequestMapping("/delete")
-   // @RequiresPermissions("generator:task:delete")
-    public R delete(@RequestBody Integer[] ids){
-		taskService.removeByIds(Arrays.asList(ids));
+    // @RequiresPermissions("generator:task:delete")
+    public R delete(@RequestBody Integer[] ids) {
+        taskService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
 
 
-
-//    获取所有学生
+    //    获取所有学生
     @PostMapping("/queryAllStuName")
     @ApiOperation("获取所有学生")
     // @RequiresPermissions("generator:task:delete")
-    public R queryAllStuName(){
-       List<SysUserEntity> s = sysUserService.queryAllStuName();
-       return R.ok().put("page", s);
+    public R queryAllStuName() {
+        List<SysUserEntity> s = sysUserService.queryAllStuName();
+        return R.ok().put("page", s);
     }
 
 
@@ -126,11 +119,10 @@ public class TaskController {
     @PostMapping("/queryAllStuNameScore")
     @ApiOperation("获取所有成绩")
     // @RequiresPermissions("generator:task:delete")
-    public R queryAllStuNameScore(){
-        List<Map<String,Object>> s = sysUserService.queryAllStuNameScore();
+    public R queryAllStuNameScore() {
+        List<Map<String, Object>> s = sysUserService.queryAllStuNameScore();
         return R.ok().put("page", s);
     }
-
 
 
 }

@@ -75,7 +75,7 @@ public class AttendanceController {
         else {
             attendance.setType("请假");
         }
-        attendance.setUserid(getUserId().intValue());
+        attendance.setUserid(String.valueOf(getUserId()));
 		attendanceService.save(attendance);
 
         return R.ok();
@@ -87,6 +87,18 @@ public class AttendanceController {
     @RequestMapping("/update")
    // @RequiresPermissions("generator:attendance:update")
     public R update(@RequestBody AttendanceEntity attendance){
+        if (attendance.getType().equals("1")){
+            attendance.setType("迟到早退");
+        }
+        else  if (attendance.getType().equals("2")){
+            attendance.setType("签到");
+        }
+        else if (attendance.getType().equals("3")){
+            attendance.setType("旷课");
+        }
+        else {
+            attendance.setType("请假");
+        }
 		attendanceService.updateById(attendance);
 
         return R.ok();

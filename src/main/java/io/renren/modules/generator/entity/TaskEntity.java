@@ -53,7 +53,7 @@ public class TaskEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private Integer getuser;
+	private String getuser;
 	/**
 	 * 
 	 */

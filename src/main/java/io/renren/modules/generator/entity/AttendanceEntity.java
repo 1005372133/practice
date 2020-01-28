@@ -38,6 +38,6 @@ public class AttendanceEntity implements Serializable {
 	/**
 	 * 
 	 */
-	private Integer userid;
+	private String userid;
 
 }
