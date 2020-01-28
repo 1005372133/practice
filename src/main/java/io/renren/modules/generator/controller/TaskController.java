@@ -22,6 +22,8 @@ import io.renren.common.utils.R;
 
 import javax.servlet.http.HttpServletRequest;
 
+import static io.renren.common.utils.ShiroUtils.getUserId;
+
 
 /**
  * @author chenshun
@@ -50,8 +52,8 @@ public class TaskController {
     @RequestMapping("/list")
     // @RequiresPermissions("generator:task:list")
     public R list(@RequestParam Map<String, Object> params) {
+        params.put("getGetTaskUser","");
         PageUtils page = taskService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 

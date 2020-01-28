@@ -6,6 +6,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -28,15 +30,18 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, TaskEntity> implements
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
+
+        String getGetTaskUser = String.valueOf(params.get("getGetTaskUser"));
+
         IPage<TaskEntity> page = this.page(
                 new Query<TaskEntity>().getPage(params),
-                new QueryWrapper<TaskEntity>()
+                new QueryWrapper<TaskEntity>() .like(StringUtils.isNotBlank(getGetTaskUser),"getuser", getGetTaskUser)
         );
         if (page.getRecords().size()!=0){
             for (int i =0 ;i<page.getRecords().size();i++){
 
                 if (StringUtils.isNotBlank(page.getRecords().get(i).getGetuser())){
-                    String[] users =page.getRecords().get(i).getGetuser().substring(1,page.getRecords().get(i).getGetuser().length()-1).split(",");
+                    String[] users =page.getRecords().get(i).getGetuser().split(",");
                     String user = "";
 
                     for (int j = 0; j < users.length; j++) {
@@ -53,6 +58,11 @@ public class TaskServiceImpl extends ServiceImpl<TaskDao, TaskEntity> implements
 
                 for (int i =0 ;i<page.getRecords().size();i++){
                     page.getRecords().get(i).setCreateuser(sysUserService.getName(page.getRecords().get(i).getCreateuser()));
+                    if (page.getRecords().get(i).getEndtime().before(new Date())){
+                        page.getRecords().get(i).setFlag("进行中");
+                    }else {
+                        page.getRecords().get(i).setFlag("已结束");
+                    }
                 }
         }
 

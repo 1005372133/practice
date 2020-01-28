@@ -141,7 +141,7 @@ public class DadilyreportController {
     @RequestMapping("/getTask")
     public  R getTask() {
         Map<String, Object> params = new HashMap<>();
-        params.put("getuser",getUserId());
+        params.put("getGetTaskUser",getUserId());
         return R.ok().put("page",taskService.queryPage(params));
     }
 }
