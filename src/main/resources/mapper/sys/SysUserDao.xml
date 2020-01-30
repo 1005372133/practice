@@ -39,17 +39,19 @@ FROM
 
 
 	<select id="queryAllStuNameScore" resultType="map">
-	SELECT
-	su.*,s.*
-FROM
-	sys_user su
-	JOIN sys_user_role sur
-	JOIN sys_role sr
-	join score s
-	where  su.user_id=sur.user_id
-	and sr.role_id =sur.role_id
-	and s.userid = su.user_id
-	and sr.role_id='1'
+		SELECT
+		su.*,
+		s.*
+		FROM
+		sys_user su
+		left JOIN sys_user_role sur on
+		su.user_id = sur.user_id
+		left JOIN sys_role sr on sr.role_id = sur.role_id
+		left JOIN score s  on s.userid = su.user_id
+		where sr.role_id = '1'
+		<if test="userId!=null">
+			and su.user_id =#{userId}
+		</if>
 	</select>
 
 

@@ -48,7 +48,7 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	SysUserEntity queryUser();
 
 
-	List<Map<String,Object>> queryAllStuNameScore();
+	List<Map<String,Object>> queryAllStuNameScore(String userId);
 
 	String getName(String userId);
 }

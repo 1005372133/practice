@@ -13,5 +13,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface ScoreDao extends BaseMapper<ScoreEntity> {
-	
+     void updateScore(ScoreEntity scoreEntity);
 }

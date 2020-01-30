@@ -1,5 +1,6 @@
 package io.renren.modules.generator.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -16,6 +17,9 @@ import io.renren.modules.generator.service.ScoreService;
 @Service("scoreService")
 public class ScoreServiceImpl extends ServiceImpl<ScoreDao, ScoreEntity> implements ScoreService {
 
+    @Autowired
+    private ScoreDao ScoreDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<ScoreEntity> page = this.page(
@@ -24,6 +28,11 @@ public class ScoreServiceImpl extends ServiceImpl<ScoreDao, ScoreEntity> impleme
         );
 
         return new PageUtils(page);
+    }
+
+
+    public void updateScore(ScoreEntity scoreEntity){
+        ScoreDao.updateScore(scoreEntity);
     }
 
 }

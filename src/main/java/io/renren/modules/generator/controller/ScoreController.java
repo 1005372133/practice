@@ -16,6 +16,7 @@ import io.renren.modules.generator.service.ScoreService;
 import io.renren.common.utils.PageUtils;
 import io.renren.common.utils.R;
 
+import static io.renren.common.utils.ShiroUtils.getUserId;
 
 
 /**
@@ -84,6 +85,18 @@ public class ScoreController {
     public R delete(@RequestBody Integer[] ids){
 		scoreService.removeByIds(Arrays.asList(ids));
 
+        return R.ok();
+    }
+
+
+
+    /**
+     * 保存
+     */
+    @RequestMapping("/updateScore")
+    //@RequiresPermissions("generator:score:save")
+    public R saveScore(@RequestBody ScoreEntity score){
+        scoreService.updateScore(score);
         return R.ok();
     }
 

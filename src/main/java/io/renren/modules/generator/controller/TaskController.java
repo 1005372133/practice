@@ -121,8 +121,8 @@ public class TaskController {
     @PostMapping("/queryAllStuNameScore")
     @ApiOperation("获取所有成绩")
     // @RequiresPermissions("generator:task:delete")
-    public R queryAllStuNameScore() {
-        List<Map<String, Object>> s = sysUserService.queryAllStuNameScore();
+    public R queryAllStuNameScore(String userId) {
+        List<Map<String, Object>> s = sysUserService.queryAllStuNameScore(userId);
         return R.ok().put("page", s);
     }
 

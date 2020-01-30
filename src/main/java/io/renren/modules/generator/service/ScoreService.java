@@ -16,5 +16,7 @@ import java.util.Map;
 public interface ScoreService extends IService<ScoreEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void updateScore(ScoreEntity scoreEntity);
 }
 

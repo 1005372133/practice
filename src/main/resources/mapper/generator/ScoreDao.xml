@@ -14,4 +14,16 @@
     </resultMap>
 
 
+    <update id="updateScore">
+        update score
+        <set>
+            <if test="qzscoure != null">qzscoure=#{qzscoure},</if>
+            <if test="qzcomment != null">qzcomment=#{qzcomment},</if>
+            <if test="qmcsoure != null">qmcsoure=#{qmcsoure},</if>
+            <if test="qmcomment != null">qmcomment=#{qmcomment}</if>
+        </set>
+        where userid=#{userid}
+    </update>
+
+
 </mapper>
