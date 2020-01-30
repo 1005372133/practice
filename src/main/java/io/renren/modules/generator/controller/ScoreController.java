@@ -3,6 +3,7 @@ package io.renren.modules.generator.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -96,6 +97,10 @@ public class ScoreController {
     @RequestMapping("/updateScore")
     //@RequiresPermissions("generator:score:save")
     public R saveScore(@RequestBody ScoreEntity score){
+        String s = String.valueOf(score.getId());
+        if (s.equals("null")){
+            scoreService.save(score);
+        }
         scoreService.updateScore(score);
         return R.ok();
     }
