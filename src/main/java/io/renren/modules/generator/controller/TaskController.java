@@ -127,4 +127,16 @@ public class TaskController {
     }
 
 
+
+    //    获取所有成绩
+    @PostMapping("/queryAllStuNameScoreStu")
+    @ApiOperation("获取所有成绩")
+    // @RequiresPermissions("generator:task:delete")
+    public R queryAllStuNameScoreStu() {
+        String userId = getUserId().toString();
+        List<Map<String, Object>> s = sysUserService.queryAllStuNameScore(userId);
+        return R.ok().put("page", s);
+    }
+
+
 }
